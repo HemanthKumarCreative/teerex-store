@@ -1,48 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import ProductCard from "../ProductCard/ProductCard";
 import { Box } from "@mui/material";
+import { fetchProducts } from "../../redux/features/product/productSlice";
 
-const PRODUCTS = [
-  {
-    id: "uvhufhvu",
-    name: "Black polo",
-    price: 300,
-    image: "",
-  },
-  {
-    id: "fufvfbvu",
-    name: "Black polo",
-    price: 300,
-    image: "",
-  },
-  {
-    id: "edfndeuhfueh",
-    name: "Black polo",
-    price: 300,
-    image: "",
-  },
-  {
-    id: "yuidjjj",
-    name: "Black polo",
-    price: 300,
-    image: "",
-  },
-];
-
-const getProducts = () => {
-  const products = PRODUCTS.map((product) => (
+const getProducts = (products) => {
+  const productsView = products.map((product) => (
     <ProductCard
       key={product.id}
       productName={product.name}
       productPrice={product.price}
-      productImage={product.image}
+      productImage={product.imageURL}
     />
   ));
-  return products;
+  return productsView;
 };
 
 const ProductListingContainer = () => {
-  return <Box>{getProducts()}</Box>;
+  const product = useSelector((state) => state.product);
+  const { loading, products, error } = product;
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+
+  return (
+    <Box>
+      {loading && <Box>Loading...</Box>}
+      {!loading && error ? <Box>Error : {error}</Box> : null}
+      {!loading && products.length ? getProducts(products) : null}
+    </Box>
+  );
 };
 
 export default ProductListingContainer;
