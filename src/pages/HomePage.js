@@ -1,0 +1,32 @@
+import React from "react";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import AppBar from "../components/AppBar/AppBar";
+import SearchBar from "../components/SearchBar/SearchBar";
+import FilterSidePanel from "../components/FilterSidePanel/FilterSidePanel";
+import ProductListingContainer from "../components/ProductListing/ProductListing";
+
+const HomePage = () => {
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <AppBar />
+        </Grid>
+        <Grid item xs={12}>
+          <SearchBar />
+        </Grid>
+        <Grid item xs={4}>
+          <FilterSidePanel />
+        </Grid>
+        <Grid item xs={8}>
+          <ProductListingContainer />
+        </Grid>
+      </Grid>
+    </Box>
+  );
+};
+
+export default HomePage;
