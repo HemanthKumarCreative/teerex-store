@@ -14,7 +14,7 @@ export default function ProductCard({
   productImage,
 }) {
   return (
-    <Card sx={{ margin: "0.5rem", padding: "0.5rem" }}>
+    <Card sx={{ margin: "0.5rem", padding: "0.5rem", alignSelf: "flex-start" }}>
       <CardContent>
         <Typography gutterBottom variant="caption" component="div">
           {productName}

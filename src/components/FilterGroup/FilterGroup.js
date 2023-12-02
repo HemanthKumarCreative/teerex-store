@@ -6,35 +6,50 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
-export default function CheckboxesGroup({ fields, criteria }) {
-  const colourObject = fields.reduce((obj, colour) => {
-    obj[colour] = false;
+export default function CheckboxesGroup({
+  fields,
+  criteria,
+  filtersAplied,
+  setFiltersAplied,
+}) {
+  const initialFields = fields.reduce((obj, field) => {
+    obj[field] = false;
     return obj;
   }, {});
-  const [state, setState] = React.useState(colourObject);
+
+  const [filter, setFilter] = React.useState(initialFields);
   const handleChange = (event) => {
-    setState({
-      ...state,
+    setFilter({
+      ...filter,
       [event.target.name]: event.target.checked,
     });
   };
+
+  React.useEffect(() => {
+    setFiltersAplied({
+      ...filtersAplied,
+      [criteria.toLowerCase()]: Object.keys(filter).filter(
+        (value) => filter[value] === true
+      ),
+    });
+  }, [filter]);
 
   return (
     <Box sx={{ display: "flex" }}>
       <FormControl component="fieldset" variant="standard">
         <FormLabel component="legend">{criteria}</FormLabel>
         <FormGroup>
-          {fields.map((colour) => (
+          {fields.map((field) => (
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={state[colour]}
+                  checked={filter[field]}
                   onChange={handleChange}
-                  name={colour}
+                  name={field}
                 />
               }
-              label={colour}
-              key={colour}
+              label={field}
+              key={field}
             />
           ))}
         </FormGroup>

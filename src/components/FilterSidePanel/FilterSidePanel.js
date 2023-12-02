@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   Box,
@@ -10,18 +10,7 @@ import {
 } from "@mui/material";
 import FilterGroup from "../FilterGroup/FilterGroup";
 
-const FilterSidePanel = () => {
-  const initialFilters = {
-    color: [],
-    gender: [],
-    price: [],
-    type: [],
-  };
-
-  const [filtersAplied, setFiltersAplied] = React.useState(initialFilters);
-
-  const handleChange = (event) => {};
-
+const FilterSidePanel = ({ filtersApplied, setFiltersApplied }) => {
   const FILTERS = {
     color: ["Red", "Blue", "Green"],
     gender: ["Men", "Women"],
@@ -33,13 +22,33 @@ const FilterSidePanel = () => {
     <Box>
       <Card sx={{ minWidth: "max-content", height: "70vh", overflowY: "auto" }}>
         <CardContent>
-          <FilterGroup fields={FILTERS.color} criteria="Colour" />
+          <FilterGroup
+            fields={FILTERS.color}
+            criteria="color"
+            filtersAplied={filtersApplied}
+            setFiltersAplied={setFiltersApplied}
+          />
           <hr />
-          <FilterGroup fields={FILTERS.gender} criteria="Gender" />
+          <FilterGroup
+            fields={FILTERS.gender}
+            criteria="Gender"
+            filtersAplied={filtersApplied}
+            setFiltersAplied={setFiltersApplied}
+          />
           <hr />
-          <FilterGroup fields={FILTERS.price} criteria="Price" />
+          <FilterGroup
+            fields={FILTERS.price}
+            criteria="price"
+            filtersAplied={filtersApplied}
+            setFiltersAplied={setFiltersApplied}
+          />
           <hr />
-          <FilterGroup fields={FILTERS.type} criteria="Type" />
+          <FilterGroup
+            fields={FILTERS.type}
+            criteria="type"
+            filtersAplied={filtersApplied}
+            setFiltersAplied={setFiltersApplied}
+          />
         </CardContent>
       </Card>
     </Box>

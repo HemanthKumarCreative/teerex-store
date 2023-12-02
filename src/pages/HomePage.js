@@ -1,7 +1,5 @@
-import React from "react";
-import { styled } from "@mui/material/styles";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import AppBar from "../components/AppBar/AppBar";
 import SearchBar from "../components/SearchBar/SearchBar";
@@ -9,6 +7,17 @@ import FilterSidePanel from "../components/FilterSidePanel/FilterSidePanel";
 import ProductListingContainer from "../components/ProductListing/ProductListing";
 
 const HomePage = () => {
+  const initialFilters = {
+    color: [],
+    gender: [],
+    price: [],
+    type: [],
+  };
+
+  const [filtersApplied, setFiltersApplied] = useState(initialFilters);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [products, setProducts] = useState([]);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
@@ -16,7 +25,11 @@ const HomePage = () => {
           <AppBar />
         </Grid>
         <Grid item xs={12}>
-          <SearchBar />
+          <SearchBar
+            filteredProducts={filteredProducts}
+            setFilteredProducts={setFilteredProducts}
+            products={products}
+          />
         </Grid>
         <Grid item xs={12}>
           <Box
@@ -25,8 +38,19 @@ const HomePage = () => {
               justifyContent: "center",
             }}
           >
-            <FilterSidePanel />
-            <ProductListingContainer />
+            <FilterSidePanel
+              filtersApplied={filtersApplied}
+              setFiltersApplied={setFiltersApplied}
+            />
+            <ProductListingContainer
+              filtersApplied={filtersApplied}
+              filteredProducts={filteredProducts}
+              setFilteredProducts={setFilteredProducts}
+              products={products}
+              setProducts={setProducts}
+              setFiltersApplied={setFiltersApplied}
+              initialFilters={initialFilters}
+            />
           </Box>
         </Grid>
       </Grid>
