@@ -26,7 +26,14 @@ const ProductListingContainer = () => {
   }, []);
 
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "inline-flex",
+        flexWrap: "wrap",
+        maxHeight: "70vh",
+        overflowY: "auto",
+      }}
+    >
       {loading && <Box>Loading...</Box>}
       {!loading && error ? <Box>Error : {error}</Box> : null}
       {!loading && products.length ? getProducts(products) : null}

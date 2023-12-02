@@ -18,11 +18,16 @@ const HomePage = () => {
         <Grid item xs={12}>
           <SearchBar />
         </Grid>
-        <Grid item xs={4}>
-          <FilterSidePanel />
-        </Grid>
-        <Grid item xs={8}>
-          <ProductListingContainer />
+        <Grid item xs={12}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <FilterSidePanel />
+            <ProductListingContainer />
+          </Box>
         </Grid>
       </Grid>
     </Box>

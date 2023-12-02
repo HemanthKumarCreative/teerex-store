@@ -3,8 +3,10 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { IconButton } from "@mui/material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import Chip from "@mui/material/Chip";
 
 export default function ProductCard({
   productName,
@@ -12,9 +14,9 @@ export default function ProductCard({
   productImage,
 }) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ margin: "0.5rem", padding: "0.5rem" }}>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="caption" component="div">
           {productName}
         </Typography>
       </CardContent>
@@ -23,11 +25,22 @@ export default function ProductCard({
         image={productImage}
         title={productName}
       />
-      <CardActions>
-        <Typography variant="body2" color="text.secondary">
-          {productPrice}
-        </Typography>
-        <Button size="small">Add to cart</Button>
+      <CardActions
+        sx={{
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "center",
+        }}
+      >
+        <Chip
+          label={`Rs. ${productPrice}`}
+          variant="outlined"
+          color="warning"
+          size="small"
+        />
+        <IconButton size="small">
+          <AddShoppingCartIcon color="success" />
+        </IconButton>
       </CardActions>
     </Card>
   );
