@@ -25,7 +25,7 @@ const FilterSidePanel = ({
 
   return (
     <Box>
-      <Card sx={{ minWidth: "max-content", height: "70vh", overflowY: "auto" }}>
+      <Card sx={{ minWidth: "max-content", height: "75vh", overflowY: "auto" }}>
         <CardContent>
           <FilterGroup
             fields={FILTERS.color}

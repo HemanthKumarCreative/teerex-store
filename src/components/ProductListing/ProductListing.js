@@ -80,7 +80,7 @@ const ProductListingContainer = ({
       sx={{
         display: "inline-flex",
         flexWrap: "wrap",
-        maxHeight: "70vh",
+        maxHeight: "75vh",
         overflowY: "auto",
         width: "80vw",
       }}

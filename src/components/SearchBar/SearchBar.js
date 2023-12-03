@@ -24,6 +24,12 @@ const SearchBar = ({
     setFilters(Object.values(filtersApplied).flat());
   }, [filtersApplied]);
 
+  useEffect(() => {
+    if (filters.length === 0) {
+      setIsFilterApplied(false);
+    }
+  }, [filters]);
+
   const handleSearch = () => {
     const searchResult = filteredProducts.filter((product) =>
       product.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -60,7 +66,7 @@ const SearchBar = ({
           size="small"
         />
       )}
-      {isFilterApplied && (
+      {isFilterApplied && filters?.length > 0 && (
         <Chip
           label={`Filters Applied: ${filters.join(", ")}`}
           variant="outlined"
