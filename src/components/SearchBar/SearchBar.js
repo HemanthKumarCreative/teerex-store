@@ -3,13 +3,26 @@ import { Box, TextField, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Chip from "@mui/material/Chip";
 
-const SearchBar = ({ filteredProducts, setFilteredProducts, products }) => {
+const SearchBar = ({
+  filteredProducts,
+  setFilteredProducts,
+  products,
+  setIsSearchApplied,
+  isSearchApplied,
+  isFilterApplied,
+  setIsFilterApplied,
+  filtersApplied,
+  setFiltersApplied,
+  initialFilters,
+}) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [isSearchApplied, setIsSearchApplied] = useState(false);
-
+  const [filters, setFilters] = useState([]);
   const handleChange = (e) => {
     setSearchQuery(e.target.value);
   };
+  useEffect(() => {
+    setFilters(Object.values(filtersApplied).flat());
+  }, [filtersApplied]);
 
   const handleSearch = () => {
     const searchResult = filteredProducts.filter((product) =>
@@ -19,10 +32,14 @@ const SearchBar = ({ filteredProducts, setFilteredProducts, products }) => {
     setIsSearchApplied(true);
   };
 
-  const handleDelete = () => {
+  const handleSearchDelete = () => {
     setIsSearchApplied(false);
     setSearchQuery("");
     setFilteredProducts(products);
+  };
+
+  const handleFilterDelete = () => {
+    window.location.reload(false);
   };
 
   return (
@@ -38,24 +55,39 @@ const SearchBar = ({ filteredProducts, setFilteredProducts, products }) => {
         <Chip
           label={`Search Query Applied: ${searchQuery}`}
           variant="outlined"
-          onDelete={handleDelete}
+          onDelete={handleSearchDelete}
           color="secondary"
           size="small"
         />
       )}
-      <Box
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-      >
-        <TextField
-          label="Search for Products"
-          variant="standard"
-          onChange={handleChange}
-          value={searchQuery}
+      {isFilterApplied && (
+        <Chip
+          label={`Filters Applied: ${filters.join(", ")}`}
+          variant="outlined"
+          onDelete={handleFilterDelete}
+          color="secondary"
+          size="small"
         />
-        <IconButton onClick={handleSearch}>
-          <SearchIcon />
-        </IconButton>
-      </Box>
+      )}
+      {!isFilterApplied && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <TextField
+            label="Search for Products"
+            variant="standard"
+            onChange={handleChange}
+            value={searchQuery}
+          />
+          <IconButton onClick={handleSearch}>
+            <SearchIcon />
+          </IconButton>
+        </Box>
+      )}
     </Box>
   );
 };

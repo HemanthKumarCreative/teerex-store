@@ -17,6 +17,8 @@ const HomePage = () => {
   const [filtersApplied, setFiltersApplied] = useState(initialFilters);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [products, setProducts] = useState([]);
+  const [isSearchApplied, setIsSearchApplied] = useState(false);
+  const [isFilterApplied, setIsFilterApplied] = useState(false);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -29,6 +31,13 @@ const HomePage = () => {
             filteredProducts={filteredProducts}
             setFilteredProducts={setFilteredProducts}
             products={products}
+            isSearchApplied={isSearchApplied}
+            setIsSearchApplied={setIsSearchApplied}
+            isFilterApplied={isFilterApplied}
+            setIsFilterApplied={setIsFilterApplied}
+            filtersApplied={filtersApplied}
+            setFiltersApplied={setFiltersApplied}
+            initialFilters={initialFilters}
           />
         </Grid>
         <Grid item xs={12}>
@@ -38,10 +47,14 @@ const HomePage = () => {
               justifyContent: "center",
             }}
           >
-            <FilterSidePanel
-              filtersApplied={filtersApplied}
-              setFiltersApplied={setFiltersApplied}
-            />
+            {!isSearchApplied && (
+              <FilterSidePanel
+                filtersApplied={filtersApplied}
+                setFiltersApplied={setFiltersApplied}
+                isFilterApplied={isFilterApplied}
+                setIsFilterApplied={setIsFilterApplied}
+              />
+            )}
             <ProductListingContainer
               filtersApplied={filtersApplied}
               filteredProducts={filteredProducts}

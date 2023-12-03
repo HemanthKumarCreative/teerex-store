@@ -10,7 +10,12 @@ import {
 } from "@mui/material";
 import FilterGroup from "../FilterGroup/FilterGroup";
 
-const FilterSidePanel = ({ filtersApplied, setFiltersApplied }) => {
+const FilterSidePanel = ({
+  filtersApplied,
+  setFiltersApplied,
+  isFilterApplied,
+  setIsFilterApplied,
+}) => {
   const FILTERS = {
     color: ["Red", "Blue", "Green"],
     gender: ["Men", "Women"],
@@ -27,6 +32,8 @@ const FilterSidePanel = ({ filtersApplied, setFiltersApplied }) => {
             criteria="color"
             filtersAplied={filtersApplied}
             setFiltersAplied={setFiltersApplied}
+            setIsFilterApplied={setIsFilterApplied}
+            isFilterApplied={isFilterApplied}
           />
           <hr />
           <FilterGroup
@@ -34,6 +41,8 @@ const FilterSidePanel = ({ filtersApplied, setFiltersApplied }) => {
             criteria="Gender"
             filtersAplied={filtersApplied}
             setFiltersAplied={setFiltersApplied}
+            setIsFilterApplied={setIsFilterApplied}
+            isFilterApplied={isFilterApplied}
           />
           <hr />
           <FilterGroup
@@ -41,6 +50,8 @@ const FilterSidePanel = ({ filtersApplied, setFiltersApplied }) => {
             criteria="price"
             filtersAplied={filtersApplied}
             setFiltersAplied={setFiltersApplied}
+            setIsFilterApplied={setIsFilterApplied}
+            isFilterApplied={isFilterApplied}
           />
           <hr />
           <FilterGroup
@@ -48,6 +59,8 @@ const FilterSidePanel = ({ filtersApplied, setFiltersApplied }) => {
             criteria="type"
             filtersAplied={filtersApplied}
             setFiltersAplied={setFiltersApplied}
+            setIsFilterApplied={setIsFilterApplied}
+            isFilterApplied={isFilterApplied}
           />
         </CardContent>
       </Card>

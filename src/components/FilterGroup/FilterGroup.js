@@ -11,6 +11,8 @@ export default function CheckboxesGroup({
   criteria,
   filtersAplied,
   setFiltersAplied,
+  setIsFilterApplied,
+  isFilterApplied,
 }) {
   const initialFields = fields.reduce((obj, field) => {
     obj[field] = false;
@@ -23,6 +25,7 @@ export default function CheckboxesGroup({
       ...filter,
       [event.target.name]: event.target.checked,
     });
+    setIsFilterApplied(true);
   };
 
   React.useEffect(() => {
