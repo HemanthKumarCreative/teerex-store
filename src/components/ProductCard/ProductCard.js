@@ -7,12 +7,21 @@ import Typography from "@mui/material/Typography";
 import { IconButton } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Chip from "@mui/material/Chip";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/features/cart/cartSlice";
 
 export default function ProductCard({
   productName,
   productPrice,
   productImage,
+  product,
 }) {
+  const dispatch = useDispatch();
+  const [isProductAdded, setIsProductAdded] = React.useState(false);
+  const addProductToCart = () => {
+    dispatch(addToCart(product));
+    setIsProductAdded(true);
+  };
   return (
     <Card sx={{ margin: "0.5rem", padding: "0.5rem", alignSelf: "flex-start" }}>
       <CardContent>
@@ -38,9 +47,11 @@ export default function ProductCard({
           color="warning"
           size="small"
         />
-        <IconButton size="small">
-          <AddShoppingCartIcon color="success" />
-        </IconButton>
+        {!isProductAdded && (
+          <IconButton size="small" onClick={addProductToCart}>
+            <AddShoppingCartIcon color="success" />
+          </IconButton>
+        )}
       </CardActions>
     </Card>
   );

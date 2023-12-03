@@ -37,7 +37,7 @@ export default function PrimarySearchAppBar() {
                 color: "#FFF",
               }}
             >
-              Products
+              <button style={{ padding: "0.5rem" }}>Products</button>
             </Typography>
           </Link>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>

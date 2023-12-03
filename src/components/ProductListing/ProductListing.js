@@ -94,6 +94,7 @@ const ProductListingContainer = ({
             productName={product.name}
             productPrice={product.price}
             productImage={product.imageURL}
+            product={product}
           />
         ))}
 

@@ -40,7 +40,9 @@ export default function CheckboxesGroup({
   return (
     <Box sx={{ display: "flex" }}>
       <FormControl component="fieldset" variant="standard">
-        <FormLabel component="legend">{criteria}</FormLabel>
+        <FormLabel component="legend">
+          {criteria.charAt(0).toUpperCase() + criteria.slice(1)}
+        </FormLabel>
         <FormGroup>
           {fields.map((field) => (
             <FormControlLabel
