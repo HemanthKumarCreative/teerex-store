@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import { Box } from "@mui/material";
 import axios from "axios";
-
+import NoProducts from "../NoProducts/NoProducts";
 const ProductListingContainer = ({
   filtersApplied,
   filteredProducts,
@@ -96,6 +96,8 @@ const ProductListingContainer = ({
             productImage={product.imageURL}
           />
         ))}
+
+      {!filteredProducts?.length && <NoProducts />}
     </Box>
   );
 };

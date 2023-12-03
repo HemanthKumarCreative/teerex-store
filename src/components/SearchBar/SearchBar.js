@@ -89,7 +89,10 @@ const SearchBar = ({
             onChange={handleChange}
             value={searchQuery}
           />
-          <IconButton onClick={handleSearch}>
+          <IconButton
+            onClick={handleSearch}
+            disabled={searchQuery.trim() === ""}
+          >
             <SearchIcon />
           </IconButton>
         </Box>

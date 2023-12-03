@@ -6,39 +6,52 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Link } from "react-router-dom";
 
 export default function PrimarySearchAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "#83547e" }}>
         <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            TeeRex Store
-          </Typography>
-          <Box sx={{ flexGrow: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            Products
-          </Typography>
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
+          <Link to="/">
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{
+                display: { xs: "none", sm: "block" },
+                color: "#FFF",
+              }}
             >
-              <Badge badgeContent={4} color="error">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
+              <button style={{ padding: "0.5rem" }}>TeeRex Store</button>
+            </Typography>
+          </Link>
+          <Box sx={{ flexGrow: 1 }} />
+          <Link to="/">
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{
+                display: { xs: "none", sm: "block" },
+                color: "#FFF",
+              }}
+            >
+              Products
+            </Typography>
+          </Link>
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <Link to="/cart">
+              <IconButton
+                size="large"
+                aria-label="show 4 new mails"
+                color="#FFF"
+              >
+                <Badge badgeContent={4} color="error">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
+            </Link>
           </Box>
         </Toolbar>
       </AppBar>
