@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuid } from "uuid";
 
 const initialState = {
   products: [],
@@ -10,7 +11,15 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      state.products.push(action.payload);
+      const product = {
+        id: uuid(),
+        name: action.payload.name,
+        productId: action.payload.id,
+        price: action.payload.price,
+        imageURL: action.payload.imageURL,
+        quantity: action.payload.quantity,
+      };
+      state.products.push(product);
       state.totalAmount += parseInt(action.payload.price);
     },
   },

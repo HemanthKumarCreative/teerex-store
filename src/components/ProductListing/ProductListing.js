@@ -1,34 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import { Box } from "@mui/material";
-import axios from "axios";
 import NoProducts from "../NoProducts/NoProducts";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProducts } from "../../redux/features/product/productSlice";
 const ProductListingContainer = ({
   filtersApplied,
   filteredProducts,
   setFilteredProducts,
-  products,
-  setProducts,
-  setFiltersApplied,
-  initialProducts,
 }) => {
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
-
-  const fetchProducts = async () => {
-    try {
-      const response = await axios.get(
-        "https://geektrust.s3.ap-southeast-1.amazonaws.com/coding-problems/shopping-cart/catalogue.json"
-      );
-      setProducts(response.data);
-      setFilteredProducts(response.data);
-      setLoading(false);
-    } catch (err) {
-      console.error(err);
-      setError("Failed to fetch products");
-      setLoading(false);
-    }
-  };
+  const product = useSelector((state) => state.product);
+  const { products, loading, error } = product;
+  const dispatch = useDispatch();
 
   const filtersPassed = (product, filterCriteria, fields) => {
     if (filterCriteria === "price") {
@@ -67,7 +50,7 @@ const ProductListingContainer = ({
   };
 
   useEffect(() => {
-    fetchProducts();
+    dispatch(fetchProducts());
   }, []);
 
   useEffect(() => {

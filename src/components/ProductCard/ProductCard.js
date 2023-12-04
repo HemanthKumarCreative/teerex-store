@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { IconButton } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Chip from "@mui/material/Chip";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/features/cart/cartSlice";
 
 export default function ProductCard({
@@ -17,11 +17,20 @@ export default function ProductCard({
   product,
 }) {
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
   const [isProductAdded, setIsProductAdded] = React.useState(false);
+  const cartProducts = cart?.products;
+  const cartProductIds = cartProducts.map((product) => product.productId);
+
   const addProductToCart = () => {
-    dispatch(addToCart(product));
-    setIsProductAdded(true);
+    if (cartProductIds.includes(product.id)) {
+      console.error("Product already Exists in cart");
+    } else {
+      dispatch(addToCart(product));
+      setIsProductAdded(true);
+    }
   };
+
   return (
     <Card sx={{ margin: "0.5rem", padding: "0.5rem", alignSelf: "flex-start" }}>
       <CardContent>
@@ -39,6 +48,7 @@ export default function ProductCard({
           display: "flex",
           justifyContent: "space-around",
           alignItems: "center",
+          width: "7vw",
         }}
       >
         <Chip
@@ -47,7 +57,7 @@ export default function ProductCard({
           color="warning"
           size="small"
         />
-        {!isProductAdded && (
+        {!cartProductIds.includes(product.id) && (
           <IconButton size="small" onClick={addProductToCart}>
             <AddShoppingCartIcon color="success" />
           </IconButton>
