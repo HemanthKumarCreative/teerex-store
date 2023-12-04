@@ -3,20 +3,36 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import { Select, MenuItem, InputLabel, FormControl, Icon } from "@mui/material";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useDispatch } from "react-redux";
+import { deleteFromCart } from "../../redux/features/cart/cartSlice";
 
 export default function MediaCard({ product, cartProducts, setCartProducts }) {
   const [selectedQuantity, setSelectedQuantity] = React.useState(
     product.cartQuantity
   );
-
+  const dispatch = useDispatch();
   const handleChange = (event) => {
     setSelectedQuantity(event.target.value);
+    setCartProducts([
+      ...cartProducts.filter((cartProduct) => cartProduct.id !== product.id),
+      { ...product, cartQuantity: event.target.value },
+    ]);
+  };
+
+  const handleDelete = () => {
+    dispatch(
+      deleteFromCart({
+        id: product.id,
+        price: product.price,
+        cartQuantity: product.cartQuantity,
+      })
+    );
+    console.log("Deleted");
   };
 
   const getMenuItems = () => {
@@ -107,6 +123,7 @@ export default function MediaCard({ product, cartProducts, setCartProducts }) {
           variant="outlined"
           sx={{ color: "#FFF" }}
           color="secondary"
+          onClick={handleDelete}
         >
           <DeleteIcon />
         </IconButton>

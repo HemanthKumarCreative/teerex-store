@@ -4,11 +4,11 @@ import { useSelector } from "react-redux";
 import CartCard from "../CartCard/CartCard";
 import NoProducts from "../NoProducts/NoProducts";
 
-const Cart = () => {
+const Cart = ({ cartCount, setCartCount }) => {
   const cart = useSelector((state) => state.cart);
-  const { products, totalAmount } = cart;
+  const { products } = cart;
   const [cartProducts, setCartProducts] = useState([]);
-
+  const [totalAmount, setTotalamount] = useState(0);
   useEffect(() => {
     const groupByProductId = (arr) => {
       return arr.reduce((acc, obj) => {
@@ -29,6 +29,24 @@ const Cart = () => {
     }
     setCartProducts(cartItems);
   }, [products]);
+
+  useEffect(() => {
+    const getTotalAmount = (products) => {
+      return products?.reduce(
+        (acc, product) =>
+          acc + parseInt(product.price) * parseInt(product.cartQuantity),
+        0
+      );
+    };
+    const getCartCount = (products) => {
+      return products?.reduce(
+        (acc, product) => acc + parseInt(product.cartQuantity),
+        0
+      );
+    };
+    setTotalamount(getTotalAmount(cartProducts));
+    setCartCount(getCartCount(cartProducts));
+  }, [cartProducts]);
 
   return (
     <Box

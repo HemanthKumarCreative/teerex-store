@@ -17,9 +17,11 @@ const SearchBar = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState([]);
+
   const handleChange = (e) => {
     setSearchQuery(e.target.value);
   };
+
   useEffect(() => {
     setFilters(Object.values(filtersApplied).flat());
   }, [filtersApplied]);
@@ -92,6 +94,7 @@ const SearchBar = ({
           <IconButton
             onClick={handleSearch}
             disabled={searchQuery.trim() === ""}
+            className="search-button-container"
           >
             <SearchIcon />
           </IconButton>

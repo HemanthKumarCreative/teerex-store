@@ -8,7 +8,7 @@ import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar({ cartCount }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "#83547e" }}>
@@ -47,7 +47,7 @@ export default function PrimarySearchAppBar() {
                 aria-label="show 4 new mails"
                 color="#FFF"
               >
-                <Badge badgeContent={4} color="error">
+                <Badge badgeContent={cartCount} color="error">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>

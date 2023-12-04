@@ -3,7 +3,6 @@ import { v4 as uuid } from "uuid";
 
 const initialState = {
   products: [],
-  totalAmount: 0,
 };
 
 const cartSlice = createSlice({
@@ -20,10 +19,17 @@ const cartSlice = createSlice({
         quantity: action.payload.quantity,
       };
       state.products.push(product);
-      state.totalAmount += parseInt(action.payload.price);
+      state.totalAmount += product.price;
+    },
+    deleteFromCart: (state, action) => {
+      state.products = state.products.filter(
+        (product) => product.id !== action.payload.id
+      );
+      state.totalAmount -=
+        parseInt(action.payload.price) * parseInt(action.payload.cartQuantity);
     },
   },
 });
 
 export default cartSlice.reducer;
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, deleteFromCart } = cartSlice.actions;
